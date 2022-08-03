@@ -8,6 +8,12 @@ router.get("/", async (req, res) => {
   res.status(200).json(doctors);
 });
 
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const doctor = await doctorModel.findById(id);
+  res.status(200).json(doctor);
+});
+
 router.post("/", async (req, res) => {
   console.log(req.body);
   const { name, description, specialization, age } = req.body;
