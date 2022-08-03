@@ -17,12 +17,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   console.log(req.body);
   const { name, description, specialization, age } = req.body;
-  const newDoctor = await doctorModel.create({
-    name,
-    description,
-    specialization,
-    age,
-  });
+  const newDoctor = await doctorModel.create({name,description,specialization,age,});
   res.status(200).json(newDoctor);
 });
 
