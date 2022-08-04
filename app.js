@@ -21,4 +21,5 @@ async function startApp() {
     console.log(e);
   }
 }
+
 startApp();
