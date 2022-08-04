@@ -1,34 +1,39 @@
 const router = require("express").Router();
-const doctorRoutes = require("../services/doctorsSrvice");
+const doctorService = require("../services/doctorsSrvice");
 
 router.get("/", async (req, res) => {
-  const doctors = await doctorRoutes.getAll();
-  res.status(200).json(doctors);
+  return await doctorService
+    .getAll()
+    .then((data) => res.status(200).json(data))
+    .catch((err) => next(err));
 });
 
 router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  const doctor = await doctorRoutes.getById(id);
-  res.status(200).json(doctor);
+  return await doctorService
+    .getById(req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => next(err));
 });
 
 router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
-  if (!id) {
-    res.status(400).json("Id not foun");
-  }
-  const deletedDoctor = await doctorRoutes.deleteById(id);
-  res.status(200).json(deletedDoctor);
+  return await doctorService
+    .deleteById(req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => next(err));
 });
 
 router.post("/", async (req, res) => {
-  const newDoctor = await doctorRoutes.create(req.body);
-  res.status(200).json(newDoctor);
+  return await doctorService
+    .create(req.body)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => next(err));
 });
 
 router.put("/", async (req, res) => {
-  const updatedDoctor = await doctorRoutes.update(req.body);
-  res.status(200).json(updatedDoctor);
+  return await doctorService
+    .update(req.body)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => next(err));
 });
 
 module.exports = router;
