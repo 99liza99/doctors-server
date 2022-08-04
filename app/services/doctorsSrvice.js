@@ -1,4 +1,4 @@
-import doctorModel from "../models/doctorModel.js";
+const doctorModel = require("../models/doctorModel");
 
 class DoctorService {
   async create(doctor) {
@@ -24,4 +24,4 @@ class DoctorService {
   }
 }
 
-export default new DoctorService();
+module.exports = new DoctorService();

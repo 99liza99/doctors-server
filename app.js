@@ -1,6 +1,6 @@
-import express from "express";
-import mongoose from "mongoose";
-import doctorRoutes from "./app/routes/doctorRoute.js";
+const express = require("express");
+const mongoose = require("mongoose");
+const doctorRoutes = require("./app/routes/doctorRoute");
 
 const app = express();
 const DB_URL =
