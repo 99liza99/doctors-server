@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const doctorRoutes = require("./app/routes/doctorRoute");
-const doctorRoutes = require("./app/routes/appoitmentRoute");
+const appoitmentsRoutes = require("./app/routes/appoitmentRoute");
 
 
 
