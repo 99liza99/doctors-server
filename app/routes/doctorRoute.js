@@ -23,6 +23,7 @@ router.delete("/:id", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
+  console.log(req.body);
   return await doctorService
     .create(req.body)
     .then((data) => res.status(200).json(data))

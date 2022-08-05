@@ -8,7 +8,18 @@ const appoitmentsRoutes = require("./app/routes/appoitmentRoute");
 const app = express();
 const DB_URL =
   "mongodb+srv://user11:user11@cluster0.fk8v0.mongodb.net/?retryWrites=true&w=majority";
-const PORT = 5000;
+const PORT = 3000;
+
+// CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  if(req.method === 'OPTIONS') {
+    res.header('Access-Control-Allows-Methods', 'PUT, POST, PATCH, DELETE, GET')
+    return res.status(200).json({});
+  }
+  next();
+})
 
 app.use(express.json());
 app.use("/doctors", doctorRoutes);
