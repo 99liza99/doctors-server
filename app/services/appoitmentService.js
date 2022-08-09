@@ -1,5 +1,8 @@
 const appoitmentModel = require("../models/appoitmentModel");
 
+
+
+
 class appoitmentService {
   async create(client) {
     return await appoitmentModel.create(client);
