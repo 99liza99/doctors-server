@@ -2,13 +2,19 @@ const router = require("express").Router();
 const appoitmentService = require("../services/appoitmentService");
 const doctorsService = require("../services/doctorsSrvice");
 
+const _mapDoctorsToAppointments = (appointments, doctors) => {
+  return appointments.map((a) => ({
+    ...a,
+    doctor: doctors.find((d) => d._id.equals(a.doctor_id)),
+  }));
+};
+
 router.get("/", async (req, res, next) => {
-  // return await appoitmentService
-  const appointments = await appoitmentService.getAll();
+  const appointments = await appoitmentService.getAll();/** Get list all appoitments */
   appointmentDoctorsIds = appointments.map(
     (appointment) => appointment.doctor_id
-  );
-  const doctors = await doctorsService.getByIds(appointmentDoctorsIds);
+  );/** get all idS of list doctors */
+  const doctors = await doctorsService.getByIds(appointmentDoctorsIds);/** Get All doctors who is in  appoitments*/
   const result = _mapDoctorsToAppointments(appointments, doctors);
   return res.status(200).json(result);
 });
@@ -42,11 +48,5 @@ router.put("/", async (req, res, next) => {
     .catch((err) => next(err));
 });
 
-const _mapDoctorsToAppointments = (appointments, doctors) => {
-  return appointments.map((appointment) => ({
-    ...appointment,
-    doctor: doctors.find((d) => d._id.equals(appointment.doctor_id)),
-  }));
-};
 
 module.exports = router;
