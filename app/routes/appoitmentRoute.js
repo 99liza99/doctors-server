@@ -14,15 +14,13 @@ const _mapDoctorToAppointment = (appointment, doctor) => {
 };
 
 const returnAppoitementWithDoctor = async (appoitemnt) =>{
-  const docotr = await doctorsService.getById(appoitemnt.doctor_id);//get doctor by doctp id
-  return _mapDoctorToAppointment(appoitemnt, docotr);//map appotiemnt
+  const doctor = await doctorsService.getById(appoitemnt.doctor_id);//get doctor by doctp id
+  return _mapDoctorToAppointment(appoitemnt, doctor);//map appotiemnt
 }
 
 router.get("/", async (req, res, next) => {
   const appointments = await appoitmentService.getAll();/** Get list all appoitments */
-  appointmentDoctorsIds = appointments.map(
-    (appointment) => appointment.doctor_id
-  );/** get all idS of list doctors */
+  appointmentDoctorsIds = appointments.map((appointment) => appointment.doctor_id);/** get all idS of list doctors */
   const doctors = await doctorsService.getByIds(appointmentDoctorsIds);/** Get All doctors who is in  appoitments*/
   const result = _mapDoctorsToAppointments(appointments, doctors);
   return res.status(200).json(result);
