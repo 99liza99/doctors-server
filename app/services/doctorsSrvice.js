@@ -15,12 +15,6 @@ class DoctorService {
     }
     return await doctorModel.findById(id);
   }
-  async getByIds(ids) {
-    if (!ids) {
-      throw new Error("id is not found");
-    }
-    return await doctorModel.find({ _id: ids });
-  }
 
   async deleteById(id) {
     if (!id) {
